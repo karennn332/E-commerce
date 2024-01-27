@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,11 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.proyects.ecommerce.dto.AuthenticationRequest;
+import com.proyects.ecommerce.dto.SignupRequest;
+import com.proyects.ecommerce.dto.UserDto;
 import com.proyects.ecommerce.entity.User;
 import com.proyects.ecommerce.repository.UserRepository;
+import com.proyects.ecommerce.services.auth.AuthService;
 import com.proyects.ecommerce.utils.JwtUtils;
 
-
+import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import netscape.javascript.JSException;
@@ -41,9 +46,11 @@ public class AuthController {
 	
 	public static final String HEADER_STRING = "Authorization";
 	
-	@PostMapping("/Authenticate")
+	private final AuthService authService;
+	
+	@PostMapping("/authenticate")
 	public void createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
-			HttpServletResponse response) throws  JSException,  JSONException, java.io.IOException {
+			HttpServletResponse response) throws  JSException,  JSONException, IOException, java.io.IOException {
 		
 		try{
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), 
@@ -59,7 +66,7 @@ public class AuthController {
 	    if(optionalUser.isPresent()) {
 	    	response.getWriter().write(new JSONObject()
 	    			.put("userId", optionalUser.get().getId())
-	    			.put("role", optionalUser.get().getId())
+	    			.put("role", optionalUser.get().getRole())
 	    			.toString()
 	    			);
 	    
@@ -69,6 +76,18 @@ public class AuthController {
 	    response.addHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
 	}
 	    	
+	}
+	
+	@PostMapping("/sign-up")
+	public ResponseEntity<?> sigupUser(@RequestBody SignupRequest signupRequest){
+		
+		if(authService.hasUserWithEmail(signupRequest.getEmail())) {
+			return new ResponseEntity<>("User already exists", HttpStatus.NOT_ACCEPTABLE);
+					
+		}
+		
+		UserDto userDto = authService.createUser(signupRequest);
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
 }
 	
