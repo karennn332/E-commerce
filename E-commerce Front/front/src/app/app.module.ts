@@ -9,6 +9,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from './signup/signup.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconButton  }  from '@angular/material/button';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import {  HttpClientModule } from '@angular/common/http';
+import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -22,8 +30,16 @@ import { SignupComponent } from './signup/signup.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    NgbModule
-  
+    NgbModule,
+    MatCardModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatIconButton,
+    MatSnackBarModule,
+    HttpClientModule,
+    MatIconModule,
+   MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
