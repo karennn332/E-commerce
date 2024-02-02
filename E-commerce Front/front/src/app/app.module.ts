@@ -16,7 +16,7 @@ import { MatIconButton  }  from '@angular/material/button';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {  HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { MatInputModule } from '@angular/material/input'
     MatSnackBarModule,
     HttpClientModule,
     MatIconModule,
-   MatInputModule
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
