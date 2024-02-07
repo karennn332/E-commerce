@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -36,7 +37,7 @@ public class SimpleCorsFilter implements Filter {
 		Map<String, String> map = new HashMap<>();
 		String originHeader = request.getHeader("origin");
 		response.setHeader("Access-Control-Allow-Origin", originHeader);
-		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT,OPTIONS,DELETE");
+		response.setHeader("Access-Control-Allow-Methods", " POST,GET, PUT,OPTIONS,DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers", "*");
 		
@@ -46,5 +47,15 @@ public class SimpleCorsFilter implements Filter {
 			chain.doFilter(req, res);
 		}
 	}
+
+     @Override
+     public void init(FilterConfig filterConfig) {
+    	 
+     }
+     
+     @Override
+     public void destroy() {
+    	 
+     }
 
 }

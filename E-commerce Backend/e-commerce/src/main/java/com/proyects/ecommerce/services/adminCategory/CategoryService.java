@@ -5,5 +5,5 @@ import com.proyects.ecommerce.entity.Category;
 
 public interface CategoryService {
 
-	Category createCategory(CategoryDto categoryDto);
+	Category createcategory(CategoryDto categoryDto);
 }

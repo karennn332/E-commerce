@@ -25,7 +25,7 @@ import com.proyects.ecommerce.repository.UserRepository;
 import com.proyects.ecommerce.services.auth.AuthService;
 import com.proyects.ecommerce.utils.JwtUtils;
 
-import io.jsonwebtoken.io.IOException;
+import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import netscape.javascript.JSException;
@@ -42,7 +42,7 @@ public class AuthController {
 	
 	private final JwtUtils jwtUtils;
 	
-	public static final String TOKEN_PREFIX= "Bearer";
+	public static final String TOKEN_PREFIX= "Bearer ";
 	
 	public static final String HEADER_STRING = "Authorization";
 	
@@ -50,7 +50,7 @@ public class AuthController {
 	
 	@PostMapping("/authenticate")
 	public void createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
-			HttpServletResponse response) throws  JSException,  JSONException, IOException, java.io.IOException {
+			HttpServletResponse response) throws  JSONException, IOException{
 		
 		try{
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), 
