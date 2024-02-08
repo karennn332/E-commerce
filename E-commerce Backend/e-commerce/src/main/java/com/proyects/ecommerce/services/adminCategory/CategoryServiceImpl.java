@@ -1,5 +1,7 @@
 package com.proyects.ecommerce.services.adminCategory;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.proyects.ecommerce.dto.CategoryDto;
@@ -23,7 +25,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryRepository.save(category);
 	}
 	
-	
+	public List<Category> getAllCategories(){
+		return categoryRepository.findAll();
+		}
 
 	
 	
